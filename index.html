@@ -20,54 +20,65 @@ body {
   text-align: center;
 }
 
+/* Rose container */
 .rose {
   position: relative;
-  width: 160px;
-  height: 160px;
+  width: 180px;
+  height: 180px;
   margin: auto;
+  transform: scale(0);
+  animation: roseBloom 3s ease-out forwards;
 }
 
-/* Petal common style */
+/* Real petal shape */
 .petal {
   position: absolute;
-  width: 80px;
-  height: 80px;
-  background: radial-gradient(circle at top left, #ff4b5c, crimson);
-  border-radius: 50% 50% 50% 50%;
-  top: 40px;
-  left: 40px;
-  transform: scale(0) rotate(0deg);
+  width: 90px;
+  height: 120px;
+  background: linear-gradient(to top right, #ff5a6e, #b3001b);
+  border-radius: 60% 60% 60% 60% / 80% 80% 40% 40%;
+  transform-origin: bottom center;
   opacity: 0;
-  animation: bloom 3s ease-out forwards;
+  animation: petalOpen 3s ease-out forwards;
 }
 
-/* Individual petals */
-.p1 { animation-delay: 0.3s; }
-.p2 { animation-delay: 0.6s; transform-origin: center; }
-.p3 { animation-delay: 0.9s; }
-.p4 { animation-delay: 1.2s; }
-.p5 { animation-delay: 1.5s; }
+/* Petal positions (spiral rose style) */
+.p1 { transform: rotate(0deg) scale(0); animation-delay: 0.4s; }
+.p2 { transform: rotate(40deg) scale(0); animation-delay: 0.8s; }
+.p3 { transform: rotate(80deg) scale(0); animation-delay: 1.2s; }
+.p4 { transform: rotate(120deg) scale(0); animation-delay: 1.6s; }
+.p5 { transform: rotate(160deg) scale(0); animation-delay: 2s; }
 
-/* Bloom animation */
-@keyframes bloom {
-  0% {
-    transform: scale(0) rotate(0deg);
+.petal {
+  top: 30px;
+  left: 45px;
+}
+
+/* Animations */
+@keyframes roseBloom {
+  from { transform: scale(0); }
+  to { transform: scale(1); }
+}
+
+@keyframes petalOpen {
+  from {
+    transform: rotate(var(--r)) scale(0);
     opacity: 0;
   }
-  100% {
-    transform: scale(1) rotate(var(--rotate));
+  to {
+    transform: rotate(var(--r)) scale(1);
     opacity: 1;
   }
 }
 
-/* Assign rotations */
-.p1 { --rotate: 0deg; }
-.p2 { --rotate: 72deg; }
-.p3 { --rotate: 144deg; }
-.p4 { --rotate: 216deg; }
-.p5 { --rotate: 288deg; }
+/* Assign rotation variables */
+.p1 { --r: 0deg; }
+.p2 { --r: 40deg; }
+.p3 { --r: 80deg; }
+.p4 { --r: 120deg; }
+.p5 { --r: 160deg; }
 
-/* Text animation */
+/* Text */
 h1 {
   margin-top: 25px;
   font-size: 26px;
@@ -100,7 +111,7 @@ p {
       <div class="petal p5"></div>
     </div>
 
-    <h1>Happy Rose Day My Dear Gougou🌹</h1>
+    <h1>Happy Rose Day 🌹</h1>
     <p>This rose blooms only for you ❤️</p>
   </div>
 </body>
